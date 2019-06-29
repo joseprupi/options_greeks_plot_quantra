@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+
+        <script src="https://cdn.plot.ly/plotly-latest.js"></script>
+        <script src="optionsplot.js"></script>
+    </head>
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+
+        <div class="container">
+            <div class="grid_form">
+                <div class="box2">
+                    <div class="title">
+                        Volatility term structure:
+                    </div>
+                    <form>
+                        Calendar:<br>
+                        <input id ="form_calendar" type="text" value="TARGET">
+                        <br>
+                        Interpolator:<br>
+                        <input id ="form_interpolator" type="text" value="BiLinear">
+                        <br>
+                        Day counter:<br>
+                        <input id ="form_day_counter" type="text" value="ActualActual">
+                        <br>
+                        Today date:<br>
+                        <input id ="form_today_date" type="text" value="2015/04/21">
+                        <br>
+                        Expiry:<br>
+                        <input id ="form_spot" type="text" value="5500">
+                        <br>
+                    </form>
+                        <br><br>
+                    </form>
+                </div>
+                <div class="box2">
+                    <form>
+                        Volatility matrix:<br>
+                        <textarea id ="form_volatility_matrix" rows="40" cols="100" value="">2015/05/21;2015/06/22;2015/07/21;2015/08/21;2015/09/21;2015/10/21;2015/11/23;2015/12/21;2016/01/21;2016/02/22;2016/03/21;2016/04/21;2016/05/23;2016/06/21;2016/07/21;2016/08/22;2016/09/21;2016/10/21;2016/11/21;2016/12/21;2017/01/23;2017/02/21;2017/03/21;2017/04/21
+2596.24;55.516;51.694;43.613;40.655;38.745;37.115;35.794;34.905;33.931;33.11;32.562;32.506;32.457;32.324;31.626;30.961;30.431;30.095;29.78;29.457;28.888;28.427;28.028;27.724
+2920.78;51.07;47.459;40.417;37.782;36.086;34.654;33.497;32.72;31.871;31.158;30.683;30.641;30.604;30.495;29.907;29.35;28.906;28.625;28.363;28.093;27.611;27.22;26.886;26.646
+3245.31;46.741;43.332;37.332;35.014;33.529;32.295;31.3;30.633;29.909;29.302;28.899;28.87;28.845;28.76;28.282;27.829;27.47;27.244;27.033;26.814;26.416;26.094;25.822;25.645
+3569.84;42.453;39.244;34.31;32.309;31.035;30.001;29.17;28.615;28.016;27.515;27.184;27.17;27.157;27.095;26.727;26.379;26.104;25.931;25.77;25.602;25.287;25.033;24.821;24.706
+3894.37;38.132;35.131;31.307;29.629;28.569;27.741;27.079;26.64;26.169;25.776;25.519;25.518;25.518;25.481;25.224;24.982;24.792;24.672;24.562;24.443;24.211;24.024;23.873;23.817
+4218.9;33.695;30.93;28.282;26.935;26.095;25.487;25.003;24.683;24.346;24.066;23.884;23.899;23.911;23.899;23.758;23.625;23.521;23.456;23.395;23.326;23.178;23.059;22.968;22.97
+4543.43;29.046;26.6;25.194;24.188;23.574;23.205;22.913;22.722;22.527;22.366;22.264;22.294;22.321;22.336;22.316;22.297;22.282;22.271;22.261;22.243;22.18;22.13;22.1;22.161
+4867.96;24.087;22.228;22.008;21.343;20.957;20.857;20.779;20.73;20.69;20.658;20.642;20.69;20.731;20.774;20.885;20.988;21.067;21.11;21.151;21.185;21.211;21.232;21.265;21.383
+5187.0;18.893;18.429;18.756;18.363;18.17;18.392;18.562;18.675;18.811;18.922;19.001;19.067;19.124;19.2;19.455;19.69;19.869;19.968;20.059;20.145;20.266;20.362;20.459;20.634
+5517.02;15.98;16.308;15.965;15.952;15.973;16.2;16.375;16.513;16.857;17.134;17.32;17.407;17.482;17.594;18.016;18.401;18.691;18.842;18.98;19.118;19.341;19.517;19.682;19.914
+5841.55;15.937;15.843;15.396;15.894;16.133;15.901;15.719;15.649;15.968;16.226;16.368;16.156;15.969;15.936;16.575;17.149;17.569;17.753;17.92;18.097;18.436;18.702;18.942;19.227
+6166.08;16.263;16.261;16.851;16.536;16.371;16.451;16.512;16.644;17.497;18.167;18.536;18.04;17.598;17.27;17.112;16.963;16.868;16.919;16.966;17.078;17.557;17.93;18.256;18.59
+6490.61;16.671;16.96;18.741;17.357;16.594;16.955;17.231;17.538;18.842;19.848;20.416;19.871;19.385;18.961;18.338;17.739;17.277;17.087;16.91;16.834;17.173;17.438;17.689;18.054
+6815.14;17.094;17.718;20.55;18.172;16.804;17.421;17.888;18.347;20.038;21.326;22.057;21.468;20.943;20.454;19.548;18.665;17.994;17.809;17.636;17.5;17.446;17.403;17.417;17.766
+7139.67;17.51;18.469;22.2;18.943;17.001;17.855;18.493;19.087;21.116;22.645;23.515;22.888;22.328;21.784;20.652;19.54;18.693;18.496;18.313;18.141;17.913;17.729;17.622;17.877
+7464.2;17.91;19.19;23.699;19.664;17.188;18.259;19.053;19.768;22.096;23.837;24.829;24.167;23.576;22.984;21.66;20.349;19.35;19.138;18.94;18.751;18.484;18.269;18.118;18.236
+7788.73;18.293;19.873;25.064;20.336;17.364;18.638;19.574;20.399;22.996;24.925;26.025;25.331;24.712;24.077;22.584;21.099;19.963;19.735;19.523;19.325;19.065;18.855;18.696;18.719</textarea>
+                    </form>
+                </div>
+            </div>
+            <div class="grid_form">
+                <div class="box2">
+                    <div class="title">
+                        Volatility surface:
+                    </div>
+                    <form>
+                        Expiration step:<br>
+                        <input id ="form_expiration_step" type="text" value="10">
+                        <br>
+                        Strike step:<br>
+                        <input id ="form_strike_step" type="text" value="244.44">
+                        <br><br>
+                        <input value="Submit" type="button" onclick="submit_volatility_values()">
+                    </form>
+                </div>
+                <div class="box2">
+                    <form>
+                        Init strike:<br>
+                        <input id ="form_init_strike" type="text" value="2596.24">
+                        <br>
+                        End strike:<br>
+                        <input id ="form_end_strike" type="text" value="7788.73">
+                    </form>
+                </div>
+                <div class="box2">
+                    <form>
+                        Init expiry:<br>
+                        <input id ="form_init_expiry" type="text" value="2015/05/21">
+                        <br>
+                        End expiry:<br>
+                        <input id ="form_end_expiry" type="text" value="2017/04/21">
+                    </form>
+                </div>
+            </div>
+            <div class="grid2">
+                
+                    <div class="box"><div id="surface_volatility"></div></div>
+                    <div class="box"><div id="line1_volatility"></div></div>
+                
+            </div>
+            <div class="grid_form">
+                <div class="box2">
+                    <div class="title">
+                        Option:
+                    </div>
+                    <form>
+                        Expiry date:<br>
+                        <input id ="form_expiry_date" type="text" value="2015/07/21">
+                        <br>    
+                        Spot step:<br>
+                        <input id ="form_spot_step" type="text" value="100">
+                        <br><br>
+                        <input value="Submit" type="button" onclick="submit_option_values()">
+                    </form>
+                </div>
+                <div class="box2">
+                    <form>
+                        Epsilon:<br>
+                        <input id ="form_epsilon" type="text" value="0.20">
+                        <br>
+                        Dividends:<br>
+                        <input id ="form_dividends" type="text" value="0.01">
+                    </form>
+                </div>
+                <div class="box2">
+                    <form>
+                        Interest rate:<br>
+                        <input id ="form_rate" type="text" value="0.02">
+                        <br>
+                    </form>
+                </div>
+                <div class="box2">
+                    Strike:<br>
+                        <label id = "min_strike" class= "label2"></label>
+                        <input type="range" id="strike_slider" name="volume"
+                               oninput="update_strike_slider(this.value)">
+                        <label id = "max_strike" style= "margin-left: 20px;"></label>
+                        <br>
+                        <label class= "label1">Strike value:</label>
+                        <label class= "value" id = "strike_value"></label>
+                </div>
+            </div>
+
+            
+
+            <div class="grid">
+                <div class="box2">
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Expiry value:</label>
+                            <label class= "value" id = "expiry_value_premium"></label>
+                        </div>
+                        <label class= "label1">Expiry:</label>
+                        <label id = "min_expiry_premium" class= "label2"></label>
+                        <input type="range" id="expiry_slider_premium" name="volume"
+                               oninput="update_expiry_slider_premium(this.value)">
+                        <label id = "max_expiry_premium" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Spot value:</label>
+                            <label class= "value" id = "spot_value_premium"></label>
+                        </div>
+                        <label class= "label1">Spot:</label>
+                        <label id = "min_spot_premium" class= "label2"></label>
+                        <input type="range" id="spot_slider_premium" name="volume"
+                               oninput="update_spot_slider_premium(this.value)">
+                        <label id = "max_spot_premium" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <label class= "label1">Premium value:</label>
+                        <label id = "value_premium" class= "value"></label>
+                    </div>
+                </div>
+                <div class="box"><div id="surface_premium"></div></div>
+                <div class="box"><div id="line1_premium"></div></div>
+                <div class="box"><div id="line2_premium"></div></div>
+            </div>
+
+            <div class="grid">
+                <div class="box2">
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Expiry value:</label>
+                            <label class= "value" id = "expiry_value_delta"></label>
+                        </div>
+                        <label class= "label1">Expiry:</label>
+                        <label id = "min_expiry_delta" class= "label2"></label>
+                        <input type="range" id="expiry_slider_delta" name="volume"
+                               oninput="update_expiry_slider_delta(this.value)">
+                        <label id = "max_expiry_delta" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Spot value:</label>
+                            <label class= "value" id = "spot_value_delta"></label>
+                        </div>
+                        <label class= "label1">Spot:</label>
+                        <label id = "min_spot_delta" class= "label2"></label>
+                        <input type="range" id="spot_slider_delta" name="volume"
+                               oninput="update_spot_slider_delta(this.value)">
+                        <label id = "max_spot_delta" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <label class= "label1">Deltaa value:</label>
+                        <label id = "value_delta" class= "value"></label>
+                    </div>
+                </div>
+                <div class="box"><div id="surface_delta"></div></div>
+                <div class="box"><div id="line1_delta"></div></div>
+                <div class="box"><div id="line2_delta"></div></div>
+            </div>
+
+            <div class="grid">
+                <div class="box2">
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Expiry value:</label>
+                            <label class= "value" id = "expiry_value_gamma"></label>
+                        </div>
+                        <label class= "label1">Expiry:</label>
+                        <label id = "min_expiry_gamma" class= "label2"></label>
+                        <input type="range" id="expiry_slider_gamma" name="volume"
+                               oninput="update_expiry_slider_gamma(this.value)">
+                        <label id = "max_expiry_gamma" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Spot value:</label>
+                            <label class= "value" id = "spot_value_gamma"></label>
+                        </div>
+                        <label class= "label1">Spot:</label>
+                        <label id = "min_spot_gamma" class= "label2"></label>
+                        <input type="range" id="spot_slider_gamma" name="volume"
+                               oninput="update_spot_slider_gamma(this.value)">
+                        <label id = "max_spot_gamma" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <label class= "label1">Gamma value:</label>
+                        <label id = "value_gamma" class= "value"></label>
+                    </div>
+                </div>
+                <div class="box"><div id="surface_gamma"></div></div>
+                <div class="box"><div id="line1_gamma"></div></div>
+                <div class="box"><div id="line2_gamma"></div></div>
+            </div>
+
+            <div class="grid">
+                <div class="box2">
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Expiry value:</label>
+                            <label class= "value" id = "expiry_value_vega"></label>
+                        </div>
+                        <label class= "label1">Expiry:</label>
+                        <label id = "min_expiry_vega" class= "label2"></label>
+                        <input type="range" id="expiry_slider_vega" name="volume"
+                               oninput="update_expiry_slider_vega(this.value)">
+                        <label id = "max_expiry_vega" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Spot value:</label>
+                            <label class= "value" id = "spot_value_vega"></label>
+                        </div>
+                        <label class= "label1">Spot:</label>
+                        <label id = "min_spot_vega" class= "label2"></label>
+                        <input type="range" id="spot_slider_vega" name="volume"
+                               oninput="update_spot_slider_vega(this.value)">
+                        <label id = "max_spot_vega" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <label class= "label1">Vega value:</label>
+                        <label id = "value_vega" class= "value"></label>
+                    </div>
+                </div>
+                <div class="box"><div id="surface_vega"></div></div>
+                <div class="box"><div id="line1_vega"></div></div>
+                <div class="box"><div id="line2_vega"></div></div>
+            </div>
+
+            <div class="grid">
+                <div class="box2">
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Expiry value:</label>
+                            <label class= "value" id = "expiry_value_theta"></label>
+                        </div>
+                        <label class= "label1">Expiry:</label>
+                        <label id = "min_expiry_theta" class= "label2"></label>
+                        <input type="range" id="expiry_slider_theta" name="volume"
+                               oninput="update_expiry_slider_theta(this.value)">
+                        <label id = "max_expiry_theta" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Spot value:</label>
+                            <label class= "value" id = "spot_value_theta"></label>
+                        </div>
+                        <label class= "label1">Spot:</label>
+                        <label id = "min_spot_theta" class= "label2"></label>
+                        <input type="range" id="spot_slider_theta" name="volume"
+                               oninput="update_spot_slider_theta(this.value)">
+                        <label id = "max_spot_theta" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <label class= "label1">Theta value:</label>
+                        <label id = "value_theta" class= "value"></label>
+                    </div>
+                </div>
+                <div class="box"><div id="surface_theta"></div></div>
+                <div class="box"><div id="line1_theta"></div></div>
+                <div class="box"><div id="line2_theta"></div></div>
+            </div>
+
+            <div class="grid">
+                <div class="box2">
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Expiry value:</label>
+                            <label class= "value" id = "expiry_value_rho"></label>
+                        </div>
+                        <label class= "label1">Expiry:</label>
+                        <label id = "min_expiry_rho" class= "label2"></label>
+                        <input type="range" id="expiry_slider_rho" name="volume"
+                               oninput="update_expiry_slider_rho(this.value)">
+                        <label id = "max_expiry_rho" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <div class="value2">
+                            <label class= "label1">Spot value:</label>
+                            <label class= "value" id = "spot_value_rho"></label>
+                        </div>
+                        <label class= "label1">Spot:</label>
+                        <label id = "min_spot_rho" class= "label2"></label>
+                        <input type="range" id="spot_slider_rho" name="volume"
+                               oninput="update_spot_slider_rho(this.value)">
+                        <label id = "max_spot_rho" style= "margin-left: 20px;"></label>
+                    </div>
+                    <div>
+                        <label class= "label1">Rho value:</label>
+                        <label id = "value_rho" class= "value"></label>
+                    </div>
+                </div>
+                <div class="box"><div id="surface_rho"></div></div>
+                <div class="box"><div id="line1_rho"></div></div>
+                <div class="box"><div id="line2_rho"></div></div>
+            </div>
+        </div>
+
+    </body>
+
+</html>
