@@ -120,9 +120,21 @@ class request_data{
             expirations.add(point['Maturity']);
         });
 
-        var values = new Array(expirations.size);
-        for(var i = 0; i < values.length; i++){
-            values[i] = new Array(spots.size)
+        var NPV_values = new Array(expirations.size);
+        var Delta_values = new Array(expirations.size);
+        var Gamma_values = new Array(expirations.size);
+        var Vega_values = new Array(expirations.size);
+        var Theta_values = new Array(expirations.size);
+        var Rho_values = new Array(expirations.size);
+
+
+        for(var i = 0; i < NPV_values.length; i++){
+            NPV_values[i] = new Array(spots.size)
+            Delta_values[i] = new Array(spots.size)
+            Gamma_values[i] = new Array(spots.size)
+            Vega_values[i] = new Array(spots.size)
+            Theta_values[i] = new Array(spots.size)
+            Rho_values[i] = new Array(spots.size)
         }
 
         var i = 0;
@@ -130,10 +142,30 @@ class request_data{
 
         spots.forEach(function(spot) {
           expirations.forEach(function(expiry) {
-              values[i][j] = data['message'].filter(function (point) {
+              NPV_values[i][j] = data['message'].filter(function (point) {
                   return point['Spot'] == spot &&
                             point['Maturity'] == expiry;
                 })[0]['NPV'];
+              Delta_values[i][j] = data['message'].filter(function (point) {
+                  return point['Spot'] == spot &&
+                            point['Maturity'] == expiry;
+                })[0]['Delta'];
+              Gamma_values[i][j] = data['message'].filter(function (point) {
+                  return point['Spot'] == spot &&
+                            point['Maturity'] == expiry;
+                })[0]['Gamma'];
+              Vega_values[i][j] = data['message'].filter(function (point) {
+                  return point['Spot'] == spot &&
+                            point['Maturity'] == expiry;
+                })[0]['Vega'];
+              Theta_values[i][j] = data['message'].filter(function (point) {
+                  return point['Spot'] == spot &&
+                            point['Maturity'] == expiry;
+                })[0]['Theta'];
+              Rho_values[i][j] = data['message'].filter(function (point) {
+                  return point['Spot'] == spot &&
+                            point['Maturity'] == expiry;
+                })[0]['Rho'];
               j++;
             });
           j=0;
@@ -143,7 +175,12 @@ class request_data{
         var response = {};
         response['spots'] = spots;
         response['expirations'] = expirations;
-        response['NPV'] = values;
+        response['NPV'] = NPV_values;
+        response['Delta'] = Delta_values;
+        response['Gamma'] = Gamma_values;
+        response['Vega'] = Vega_values;
+        response['Theta'] = Theta_values;
+        response['Rho'] = Rho_values;
 
         return response;
 
@@ -620,37 +657,37 @@ class greek{
             this.surface_element = 'surface_delta';
             this.line1_element = 'line1_delta';
             this.line2_element = 'line2_delta';
-            this.array_index_value = 'delta';
+            this.array_index_value = 'Delta';
             this.element = 'delta';
         }else if(this.greek_type == 'Gamma'){
             this.surface_element = 'surface_gamma';
             this.line1_element = 'line1_gamma';
             this.line2_element = 'line2_gamma';
-            this.array_index_value = 'gamma';
+            this.array_index_value = 'Gamma';
             this.element = 'gamma';
         }else if(this.greek_type == 'Vega'){
             this.surface_element = 'surface_vega';
             this.line1_element = 'line1_vega';
             this.line2_element = 'line2_vega';
-            this.array_index_value = 'vega';
+            this.array_index_value = 'Vega';
             this.element = 'vega';
         }else if(this.greek_type == 'Theta'){
             this.surface_element = 'surface_theta';
             this.line1_element = 'line1_theta';
             this.line2_element = 'line2_theta';
-            this.array_index_value = 'theta';
+            this.array_index_value = 'Theta';
             this.element = 'theta';
         }else if(this.greek_type == 'Rho'){
             this.surface_element = 'surface_rho';
             this.line1_element = 'line1_rho';
             this.line2_element = 'line2_rho';
-            this.array_index_value = 'rho';
+            this.array_index_value = 'Rho';
             this.element = 'rho';
         }
 
         this.surface = new surface_plot(greek_type, this.surface_element);
-        this.line1 = new line_plot(this.line1_element, 'Spot');
-        this.line2 = new line_plot(this.line2_element, 'Expiry');
+        this.line1 = new line_plot(this.line1_element, 'Spot', true);
+        this.line2 = new line_plot(this.line2_element, 'Expiry', true);
 
         this.x_pos = 0;
         this.y_pos = 0;
@@ -847,14 +884,9 @@ class sliders{
         document.getElementById("expiry_value" + "_" + this.element).innerHTML = this.liney_data[0];
     }
 
-    update_spot_value(pos){
-        document.getElementById("spot_value" + "_" + this.element).innerHTML =
-            Math.round(this.linex_data[pos] * 100) / 100;
-    }
-
     update_expiry_value(pos){
         document.getElementById("expiry_value" + "_" + this.element).innerHTML =
-            Math.round(this.liney_data[pos] * 100) / 100;
+            this.liney_data[pos];
     }
 
     init_spot_slider(data){
@@ -871,6 +903,11 @@ class sliders{
         document.getElementById("max_spot" + "_" + this.element).innerHTML = max_value;
 
         document.getElementById("spot_value" + "_" + this.element).innerHTML = this.linex_data[0];
+    }
+
+    update_spot_value(pos){
+        document.getElementById("spot_value" + "_" + this.element).innerHTML =
+            Math.round(this.linex_data[pos] * 100) / 100;
     }
 }
 
@@ -938,78 +975,78 @@ function update_strike_slider(value){
 // Premium slider functions
 function update_spot_slider_premium(value){
     premium.update_liney_data(value);
-    premium.update_spot_lines(value);
+    premium.update_time_lines();
     premium_slider.update_spot_value(value);
 }
 
 function update_expiry_slider_premium(value){
     premium.update_linex_data(value);
-    premium.update_time_lines();
+    premium.update_spot_lines(value);
     premium_slider.update_expiry_value(value);
 }
 
 // Delta slider functions
 function update_spot_slider_delta(value){
-    delta.update_linex_data(value);
-    //delta.update_spot_lines(value);
+    delta.update_liney_data(value);
+    delta.update_time_lines(value);
     delta_slider.update_spot_value(value);
 }
 
 function update_expiry_slider_delta(value){
-    delta.update_liney_data(value);
-    delta.update_time_lines();
+    delta.update_linex_data(value);
+    delta.update_spot_lines();
     delta_slider.update_expiry_value(value);
 }
 
 // Gamma gamma functions
 function update_spot_slider_gamma(value){
-    gamma.update_linex_data(value);
-    gamma.update_spot_lines(value);
+    gamma.update_liney_data(value);
+    gamma.update_time_lines(value);
     gamma_slider.update_spot_value(value);
 }
 
 function update_expiry_slider_gamma(value){
-    gamma.update_liney_data(value);
-    gamma.update_time_lines();
+    gamma.update_linex_data(value);
+    gamma.update_spot_lines();
     gamma_slider.update_expiry_value(value);
 }
 
 // Vega slider functions
 function update_spot_slider_vega(value){
-    vega.update_linex_data(value);
-    vega.update_spot_lines(value);
+    vega.update_liney_data(value);
+    vega.update_time_lines(value);
     vega_slider.update_spot_value(value);
 }
 
 function update_expiry_slider_vega(value){
-    vega.update_liney_data(value);
-    vega.update_time_lines();
+    vega.update_linex_data(value);
+    vega.update_spot_lines();
     vega_slider.update_expiry_value(value);
 }
 
 // Theta slider functions
 function update_spot_slider_theta(value){
-    theta.update_linex_data(value);
-    theta.update_spot_lines(value);
+    theta.update_liney_data(value);
+    theta.update_time_lines(value);
     theta_slider.update_spot_value(value);
 }
 
 function update_expiry_slider_theta(value){
     theta.update_liney_data(value);
-    theta.update_time_lines();
+    theta.update_spot_lines();
     theta_slider.update_expiry_value(value);
 }
 
 // Rho slider functions
 function update_spot_slider_rho(value){
-    rho.update_linex_data(value);
-    rho.update_spot_lines(value);
+    rho.update_liney_data(value);
+    rho.update_time_lines(value);
     rho_slider.update_spot_value(value);
 }
 
 function update_expiry_slider_rho(value){
     rho.update_liney_data(value);
-    rho.update_time_lines();
+    rho.update_spot_lines();
     rho_slider.update_expiry_value(value);
 }
 
@@ -1066,8 +1103,22 @@ async function submit_option_values(){
          volatility_surface.x_data[volatility_surface.x_pos]);
 
     premium.update_greek(option_response);
-
     premium_slider.set_values(premium.linex_data.y, premium.liney_data.x);
+
+    delta.update_greek(option_response);
+    delta_slider.set_values(delta.linex_data.y, delta.liney_data.x);
+
+    gamma.update_greek(option_response);
+    gamma_slider.set_values(gamma.linex_data.y, gamma.liney_data.x);
+
+    vega.update_greek(option_response);
+    vega_slider.set_values(vega.linex_data.y, vega.liney_data.x);
+
+    theta.update_greek(option_response);
+    theta_slider.set_values(theta.linex_data.y, theta.liney_data.x);
+
+    rho.update_greek(option_response);
+    rho_slider.set_values(rho.linex_data.y, rho.liney_data.x);
 
 }
 
