@@ -22,3 +22,5 @@ The parametrizaion is the QuantLb one, meaning you can find most of the informat
 #### Sticky strike ####
 
 The sticky strike approach, as explained in [wikipedia](https://en.wikipedia.org/wiki/Volatility_smile#Evolution:_Sticky) and with some more detail in this [Derman publication](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.147.3639) at *The Sticky-Strike Rule*, says that the same volatility can be used for the underlying process for different spot prices.
+
+![alt text](https://quantra.io/options_greeks_plot_quantra/greek.png)
