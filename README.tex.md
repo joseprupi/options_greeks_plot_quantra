@@ -4,8 +4,16 @@ This web app will plot the different surfaces for an european option with a stic
 
 #### See it working ####
 
-If you want to see it working click [here](https://quantra.io/options_greeks_plot_quantra/), generate the volatility surface from the already inputed data and clicking the first submit button, select the strike you want and click the second submig button to generate the premium and greeks surfaces.
+If you want to see it working:
 
+* Click [here](https://quantra.io/options_greeks_plot_quantra/) 
+* Generate the volatility surface from the already inputted data and clicking the first submit button 
+* Select the strike you want 
+* And click the second submit button to generate the premium and greeks surfaces.
+
+#### Sticky strike ####
+
+The sticky strike approach, as explained 
 An intuitive way of understanding [a Wiener process](https://en.wikipedia.org/wiki/Wiener_process) is seeing it as a limit of [random walk](https://github.com/joseprupi/randomwalk). From wikipedia:
 
 **Let $\xi_1, xi_2, ...$ be i.i.d. random variables with mean 0 and variance 1. For each n, define a continuous time stochastic process:**
