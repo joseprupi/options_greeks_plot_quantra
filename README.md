@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Stochastic processes #
 
 [Wiener proces](#wiener-process)
@@ -18,6 +17,7 @@ An intuitive way of understanding [a Wiener process](https://en.wikipedia.org/wi
 **This is a random step function. Increments <img src="/tex/fc848c2ebd267b4cd8b5bd06be9b2816.svg?invert_in_darkmode&sanitize=true" align=middle width=23.65115609999999pt height=22.465723500000017pt/> are independent because the <img src="/tex/44d9dddc6e2b61323f5595edb826a9f3.svg?invert_in_darkmode&sanitize=true" align=middle width=14.45784119999999pt height=22.831056599999986pt/> are independent. For large n, <img src="/tex/4a3405f5321fcb2629bfb24d3ba53383.svg?invert_in_darkmode&sanitize=true" align=middle width=108.24977789999998pt height=24.65753399999998pt/> is close to <img src="/tex/f7399f5fa2339fb9cc91ed56a55a7e6b.svg?invert_in_darkmode&sanitize=true" align=middle width=77.04326189999999pt height=24.65753399999998pt/> [by the central limit theorem](https://github.com/joseprupi/randomwalk#central-limit-theorem). Donsker's theorem proved that as <img src="/tex/ef14b5590a55d11e5c8dd5b37eb6fdf2.svg?invert_in_darkmode&sanitize=true" align=middle width=51.87587954999999pt height=14.15524440000002pt/> , <img src="/tex/fc848c2ebd267b4cd8b5bd06be9b2816.svg?invert_in_darkmode&sanitize=true" align=middle width=23.65115609999999pt height=22.465723500000017pt/> approaches a Wiener process, which explains the ubiquity of Brownian.**
 
 And also from wikipedia, a Wiener process has to follow below properties:
+
 
 * **<img src="/tex/8bbb73a94710de20f4c34bd07424b785.svg?invert_in_darkmode&sanitize=true" align=middle width=53.03643344999998pt height=22.465723500000017pt/> a.s.**
 * **<img src="/tex/84c95f91a742c9ceb460a83f9b5090bf.svg?invert_in_darkmode&sanitize=true" align=middle width=17.80826024999999pt height=22.465723500000017pt/> has independent increments: for every <img src="/tex/5a55f30e694820fa3f61e00fd5ba99cd.svg?invert_in_darkmode&sanitize=true" align=middle width=40.639161749999985pt height=21.18721440000001pt/> the future increments <img src="/tex/13b9a8515ad4a4e22699dd4336e6d8bd.svg?invert_in_darkmode&sanitize=true" align=middle width=85.14657689999999pt height=22.465723500000017pt/> <img src="/tex/132671665582964132d1164d1b7ce344.svg?invert_in_darkmode&sanitize=true" align=middle width=44.11333739999999pt height=21.18721440000001pt/>, are independent of the past values <img src="/tex/2513f91cdbcc53200ac80c43ba9b8f7e.svg?invert_in_darkmode&sanitize=true" align=middle width=69.98273205pt height=22.465723500000017pt/>**
@@ -105,7 +105,4 @@ And this is always positive. Furthermore, this tells us that:
 
 <img src="/tex/6d01601a3863a93c212ce89b019d8f9f.svg?invert_in_darkmode&sanitize=true" align=middle width=242.4077139pt height=37.80850590000001pt/>
 
-Which also "approximately" models the return as normal (see [this](https://stats.stackexchange.com/questions/244199/why-is-it-that-natural-log-changes-are-percentage-changes-what-is-about-logs-th/244237#244237) )
-=======
-# options_greeks_plot_quantra
->>>>>>> d7ea6bcf1aeebe6839f05867768c2b3f98fbd1d9
+Which also "approximately" models the stock return as normal (see [this](https://stats.stackexchange.com/questions/244199/why-is-it-that-natural-log-changes-are-percentage-changes-what-is-about-logs-th/244237#244237) )
