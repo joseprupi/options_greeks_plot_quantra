@@ -1,36 +1,3 @@
-class data{
-
-    constructor(){
-        var data_array = [];
-    }
-
-    async fetch() {
-        let data = await fetch('http://127.0.0.1:5000/');
-        let json = await data.json();
-        return json;
-    }
-
-    async fetch_params(form_today_date, form_expiry_date, form_short_expiry, form_long_expiry, form_strike,
-                       form_epsilon, form_rate, form_dividends, implied_vol_values) {
-
-        var params =
-            'form_today_date=' + form_today_date +
-            '&form_expiry_date=' + form_expiry_date +
-            '&form_short_expiry=' + form_short_expiry +
-            '&form_long_expiry=' + form_long_expiry +
-            '&form_strike=' + form_strike +
-            '&form_epsilon=' + form_epsilon +
-            '&form_rate=' + form_rate +
-            '&form_dividends=' + form_dividends +
-            '&implied_vol_values=' + implied_vol_values
-
-        let data = await fetch('http://127.0.0.1:5000/greeks?'+params);
-        let json = await data.json();
-        return json;
-    }
-
-} 
-
 class request_data{
 
     constructor(){
@@ -200,7 +167,7 @@ class pricing_request{
         var json_request = this.create_option_pricing_request(calendar, interpolator, volatility_matrix,
         asofdate, spot, strike, maturity, settlement, daycounter, riskfreerate, dividendyield);
 
-        let data = await fetch('http://0.0.0.0:18080/multiOptionPricing',{
+        let data = await fetch('https://api.quantra.io/multiOptionPricing',{
             method: 'POST',
             body: JSON.stringify(json_request)
         });
@@ -312,7 +279,7 @@ class volatility_surface_request{
             day_counter, volatility_matrix, expiration_step, strike_step, init_strike, end_strike, 
             init_date, end_date, asofdate);
 
-        let data = await fetch('http://0.0.0.0:18080/volatilitySurface',{
+        let data = await fetch('https://api.quantra.io/volatilitySurface',{
             method: 'POST',
             body: JSON.stringify(json_request)
         });
