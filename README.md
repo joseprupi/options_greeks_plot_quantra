@@ -1,11 +1,10 @@
-# Stochastic processes #
+# Plotting option greeks with sticky strike approach #
 
-[Wiener proces](#wiener-process)
+This web app will plot the different surfaces for an european option with a sticky strike approach.
 
-[Stock proces](#stock-process)
+#### See it working ####
 
-#### Wiener process ####
-
+If you want to see it working click [here](https://quantra.io/options_greeks_plot_quantra/), generate the volatility surface from the already inputed data and clicking the first submit button, select the strike you want and click the second submig button to generate the premium and greeks surfaces.
 
 An intuitive way of understanding [a Wiener process](https://en.wikipedia.org/wiki/Wiener_process) is seeing it as a limit of [random walk](https://github.com/joseprupi/randomwalk). From wikipedia:
 
