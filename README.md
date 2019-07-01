@@ -7,13 +7,21 @@ This web app will plot the different surfaces for an european option with a stic
 If you want to see it working:
 
 * Click [here](https://quantra.io/options_greeks_plot_quantra/) 
-* Generate the volatility surface from the already inputted data and clicking the first submit button 
+* Generate the volatility surface from the already inputted data and clicking the first submit button under the *Volatility Surface* section 
 * Select the strike you want 
-* And click the second submit button to generate the premium and greeks surfaces.
+* And click the second submit button under the *Option* section to generate the premium and greeks surfaces.
+
+#### How does it work ####
+
+This app is using [quantra.io](https://quantra.io/) as a backend, which is a REST api wrapper for QuantLib.
+
+#### Parameters ####
+
+The parametrizaion is the QuantLb one, meaning you can find most of the information in the project [website](https://www.quantlib.org/). The volatility surface is a matrix where the first row are the different expiry dates and the first column the strike values.
 
 #### Sticky strike ####
 
-The sticky strike approach, as explained 
+The sticky strike approach, as explained here and 
 An intuitive way of understanding [a Wiener process](https://en.wikipedia.org/wiki/Wiener_process) is seeing it as a limit of [random walk](https://github.com/joseprupi/randomwalk). From wikipedia:
 
 **Let <img src="/tex/77f80dcb57870d15d47ff42fd83925b9.svg?invert_in_darkmode&sanitize=true" align=middle width=65.30938425pt height=22.831056599999986pt/> be i.i.d. random variables with mean 0 and variance 1. For each n, define a continuous time stochastic process:**
