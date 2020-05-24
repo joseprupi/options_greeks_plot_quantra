@@ -171,7 +171,6 @@ class pricing_request{
             headers: {
                 'Authorization': token
             },
-            crossDomain: true,
             method: 'POST',
             body: JSON.stringify(json_request)
         });
@@ -287,7 +286,6 @@ class volatility_surface_request{
             headers: {
                 'Authorization': token
             },
-            crossDomain: true,
             method: 'POST',
             body: JSON.stringify(json_request)
         });
