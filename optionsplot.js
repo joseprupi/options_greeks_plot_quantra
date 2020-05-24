@@ -4,14 +4,14 @@ class request_data{
         var json_request = '';
     }
 
-    async create_surface_request(form_calendar, form_interpolator, form_day_counter, form_today_date, form_volatility_matrix,
+    async create_surface_request(form_token, form_calendar, form_interpolator, form_day_counter, form_today_date, form_volatility_matrix,
         form_expiration_step, form_strike_step, form_init_strike, form_end_strike, form_init_expiry, form_end_expiry,
         form_rate, form_dividends, form_expiry_date, form_spot, form_epsilon)
     {
 
         var surface_request = new volatility_surface_request();
 
-        let data = await surface_request.fetch_surface(form_calendar, 
+        let data = await surface_request.fetch_surface(form_token, form_calendar,
             form_interpolator, form_day_counter, form_volatility_matrix, form_expiration_step, 
             form_strike_step, form_init_strike, form_end_strike, form_init_expiry, form_end_expiry, form_today_date)
 
@@ -50,7 +50,7 @@ class request_data{
         return response;
     }
 
-    async create_option_request(form_calendar, form_interpolator, form_day_counter, form_today_date, form_volatility_matrix,
+    async create_option_request(form_token, form_calendar, form_interpolator, form_day_counter, form_today_date, form_volatility_matrix,
         form_rate, form_dividends, form_expiry_date, form_spot, form_spot_step, form_epsilon, expirations, strike)
     {
 
@@ -75,7 +75,7 @@ class request_data{
             maturities.push(expiry);
         });
             
-        let data = await option_pricing.fetch_option(form_calendar, form_interpolator, 
+        let data = await option_pricing.fetch_option(form_token, form_calendar, form_interpolator,
                     form_volatility_matrix, form_today_date, underlyings, strike, maturities, form_today_date, 
                     form_day_counter, form_rate, form_dividends);
 
@@ -161,13 +161,16 @@ class pricing_request{
         var json_request = '';
     }
 
-    async fetch_option(calendar, interpolator, volatility_matrix,
+    async fetch_option(token, calendar, interpolator, volatility_matrix,
         asofdate, spot, strike, maturity, settlement, daycounter, riskfreerate, dividendyield) {
 
         var json_request = this.create_option_pricing_request(calendar, interpolator, volatility_matrix,
         asofdate, spot, strike, maturity, settlement, daycounter, riskfreerate, dividendyield);
 
         let data = await fetch('https://api.quantra.io/multiOptionPricing',{
+            headers: {
+                'Authorization': token
+            },
             method: 'POST',
             body: JSON.stringify(json_request)
         });
@@ -271,7 +274,7 @@ class volatility_surface_request{
         var json_request = '';
     }
 
-    async fetch_surface(calendar, interpolator, 
+    async fetch_surface(token, calendar, interpolator,
             day_counter, volatility_matrix, expiration_step, strike_step, init_strike, end_strike, 
             init_date, end_date, asofdate) {
 
@@ -280,6 +283,9 @@ class volatility_surface_request{
             init_date, end_date, asofdate);
 
         let data = await fetch('https://api.quantra.io/volatilitySurface',{
+            headers: {
+                'Authorization': token
+            },
             method: 'POST',
             body: JSON.stringify(json_request)
         });
@@ -1020,6 +1026,7 @@ function update_expiry_slider_rho(value){
 var implied_vol_values;
 
 async function submit_volatility_values(){
+    form_token = document.getElementById("form_token").value;
     form_calendar = document.getElementById("form_calendar").value;
     form_interpolator = document.getElementById("form_interpolator").value;
     form_day_counter = document.getElementById("form_day_counter").value;
@@ -1038,7 +1045,7 @@ async function submit_volatility_values(){
     form_epsilon = document.getElementById("form_epsilon").value;
     form_spot_step = document.getElementById("form_spot_step").value;
 
-    let volatility_response = await request.create_surface_request(form_calendar, form_interpolator, form_day_counter, form_today_date, form_volatility_matrix,
+    let volatility_response = await request.create_surface_request(form_token, form_calendar, form_interpolator, form_day_counter, form_today_date, form_volatility_matrix,
         form_expiration_step, form_strike_step, form_init_strike, form_end_strike, form_init_expiry, form_end_expiry,
         form_rate, form_dividends, form_expiry_date, form_spot, form_epsilon)
 
@@ -1047,6 +1054,7 @@ async function submit_volatility_values(){
 }
 
 async function submit_option_values(){
+    form_token = document.getElementById("form_token").value;
     form_calendar = document.getElementById("form_calendar").value;
     form_interpolator = document.getElementById("form_interpolator").value;
     form_day_counter = document.getElementById("form_day_counter").value;
@@ -1065,7 +1073,7 @@ async function submit_option_values(){
     form_epsilon = document.getElementById("form_epsilon").value;
     form_spot_step = document.getElementById("form_spot_step").value;
 
-    let option_response = await request.create_option_request(form_calendar, form_interpolator, form_day_counter, form_today_date, form_volatility_matrix,
+    let option_response = await request.create_option_request(form_token, form_calendar, form_interpolator, form_day_counter, form_today_date, form_volatility_matrix,
         form_rate, form_dividends, form_expiry_date, form_spot, form_spot_step, form_epsilon, volatility_surface.y_data,
          volatility_surface.x_data[volatility_surface.x_pos]);
 
