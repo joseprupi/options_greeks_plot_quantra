@@ -166,7 +166,6 @@ class pricing_request{
 
         var json_request = this.create_option_pricing_request(calendar, interpolator, volatility_matrix,
         asofdate, spot, strike, maturity, settlement, daycounter, riskfreerate, dividendyield);
-        debugger;
         let data = await fetch('https://api.quantra.io/multiOptionPricing',{
             headers: {
                 'Authorization': token
